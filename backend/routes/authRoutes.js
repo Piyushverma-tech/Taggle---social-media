@@ -7,4 +7,5 @@ const router = express.Router();
 router.post("/register", uploadFile, resigteUser);
 router.post("/login", loginUser);
 router.get("/logout", logoutUser);
+
 export default router;
