@@ -1,6 +1,8 @@
 import { Chat } from "../models/chatModel.js";
 import { Messages } from "../models/messages.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 import TryCatch from "../utils/tryCatch.js";
+
 
 export const sendMessage = TryCatch(async (req, res) => {
     const { receiverId, message } = req.body;
@@ -41,6 +43,13 @@ export const sendMessage = TryCatch(async (req, res) => {
         },
     });
 
+    const receiverSocketId = getReceiverSocketId(receiverId);
+
+    if(receiverSocketId) {
+        io.to(receiverSocketId).emit("newMessage", newMessage);
+        
+    }
+
     res.status(201).json(newMessage);
 });
 
@@ -70,6 +79,12 @@ export const getAllChats = TryCatch(async (req, res) => {
     }).populate({
         path: "users",
         select: "name profilePic",
+    });
+
+    chats.forEach((e) => {
+        e.users = e.users.filter(
+            (user) => user._id.toString() !== req.user._id.toString()
+        );
     });
     
     res.json(chats);

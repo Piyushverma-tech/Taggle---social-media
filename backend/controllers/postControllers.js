@@ -63,8 +63,8 @@ export const deletePost = TryCatch(async (req, res) =>{
 });
 
 export const getAllPosts = TryCatch(async (req, res) => {
-    const posts = await Post.find({type: 'post'}).sort({createdAt: -1}).populate("owner", "-password");
-    const reels = await Post.find({type: 'reel'}).sort({createdAt: -1}).populate("owner", "-password");
+    const posts = await Post.find({type: 'post'}).sort({createdAt: -1}).populate("owner", "-password").populate({ path: "comments.user", select: "-password",});
+    const reels = await Post.find({type: 'reel'}).sort({createdAt: -1}).populate("owner", "-password").populate({ path: "comments.user", select: "-password",});
 
     res.json({ posts, reels });
 });
@@ -112,9 +112,9 @@ export const deleteComment = TryCatch(async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({message: "No post found from this id"});
 
-    if (!req.body.commentId) return res.status(404).json({message:"please provide a comment Id"});
+    if (!req.query.commentId) return res.status(404).json({message:"please provide a comment Id"});
 
-    const commentIndex = post.comments.findIndex((item) => item._id.toString() === req.body.commentId.toString());
+    const commentIndex = post.comments.findIndex((item) => item._id.toString() === req.query.commentId.toString());
 
     if(commentIndex === -1) return res.status(400).json({
         message: "Comment not found"
@@ -143,7 +143,7 @@ export const updateCaption = TryCatch(async (req, res) => {
 
     if (!post) return res.status(404).json({message: "No post found from this id"});
 
-    if(post.owner.toString() === req.user._id.toString()) return res.status(403).json({
+    if(post.owner.toString() !== req.user._id.toString()) return res.status(403).json({
         message: "you are not authorized to edit this post",
     });
 

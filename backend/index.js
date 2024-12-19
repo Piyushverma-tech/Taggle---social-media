@@ -7,8 +7,12 @@ import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 
+import {app, server,} from "./socket/socket.js"
+
 import cloudinary from "cloudinary";
 import cookieParser from 'cookie-parser';
+
+import path from "path";
 
 
 dotenv.config();
@@ -20,7 +24,6 @@ cloudinary.v2.config({
 }
 );
 
-const app = express();
 
 // middleware
 app.use(express.json());
@@ -28,17 +31,21 @@ app.use(cookieParser());
 
 const port = process.env.PORT; 
 
-app.get('/', (req, res) => {
-    res.send('Server is running');
-})
-
 //using routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/messages', messageRoutes);
 
-app.listen(port, () => {
+
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
+
+server.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
     connectDB(); 
 });

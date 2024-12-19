@@ -89,20 +89,49 @@ export const updateProfile = TryCatch(async (req, res) => {
     res.json({message: "profile updated"});
 });
 
+
 export const updatePassword = TryCatch(async (req, res) => {
     const user = await User.findById(req.user._id);
-    const {currentPassword, newPassword} = req.body;
+    const { currentPassword, newPassword } = req.body;
 
-    const comparePassword = await bcrypt.compare(currentPassword, user.password);
 
-    if (!comparePassword)
+    if (!currentPassword || !newPassword) {
+        return res.status(400).json({ message: "Both current and new passwords are required" });
+    }
+
+
+    if (newPassword.length < 8) {
+        return res.status(400).json({ message: "New password must be at least 8 characters long" });
+    }
+
+    // Comparing password
+    const isPasswordCorrect = await bcrypt.compare(currentPassword, user.password);
+    if (!isPasswordCorrect) {
         return res.status(400).json({ message: "Current password is incorrect" });
+    }
 
-   
+    // Update and hash new password
     user.password = await bcrypt.hash(newPassword, 10);
+
 
     await user.save();
 
-    res.json({ message: "Password updated" });
-    
+
+    res.json({ message: "Password updated successfully" });
+});
+
+
+
+export const searchUser = TryCatch(async (req, res) => {
+
+    const search = req.query.search || "";
+    const users = await User.find({
+        name:{
+            $regex: search,
+            $options: 'i'  // case-insensitive search
+        },
+        _id: {$ne: req.user._id},
+    }).select("-password");
+
+    res.json(users);
 });
