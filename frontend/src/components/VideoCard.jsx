@@ -88,7 +88,7 @@ const VideoCard = ({ type, value }) => {
   }
 
   return (
-    <div className="relative flex flex-col items-center max-w-screen-md mx-auto bg-slate-400 bg-opacity-30 shadow-md rounded-lg overflow-hidden mb-6 mt-6">
+    <div className="relative flex flex-col items-center max-w-screen-md mx-auto bg-slate-400 bg-opacity-30 shadow-md rounded-md overflow-hidden mb-6 mt-6">
       <EditModal isOpen={showModal} onClose={closeModal}>
         <div className="flex flex-col items-center justify-center gap-3 overflow-hidden">
           <button className="text-gray-800 font-medium px-28 py-2 hover:bg-gray-100 transition duration-300" onClick={handleEdit}>Edit</button>

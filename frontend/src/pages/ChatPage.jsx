@@ -75,7 +75,7 @@ const ChatPage = ({ }) => {
       {/* Chat List Section */}
       {!selectedChat && (
         <div className="ml-auto mr-auto w-full min-h-screen max-w-md bg-gradient-to-r from-blue-100 to-purple-200 rounded-xl shadow-lg  relative">
-              <h1 className="text-center">Say hi to your friend</h1>
+              <h1 className="text-center pt-4">Say hi to your friend</h1>
           {/* Search Bar */}
           <div className="p-4 border-b">
             <div className="flex items-center gap-2">

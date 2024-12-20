@@ -152,7 +152,7 @@ const PostCard = ({ type, value }) => {
           <>
             <div className="flex items-center gap-3">
               <input
-                className="flex-grow p-2 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                className="flex-grow p-2 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                 type="text"
                 placeholder="Enter Caption"
                 value={caption}
@@ -199,15 +199,15 @@ const PostCard = ({ type, value }) => {
 
       {/* Actions */}
       <div className="p-4 flex items-center justify-between">
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-10">
           <button
             onClick={handleLike}
             className={`flex items-center ${
               isLiked ? "text-red-500" : "text-gray-500"
             }`}
           >
-            <FaHeart className="mr-2" size={20} />
-            <span>{value.likes.length} Likes</span>
+            <FaHeart className="mr-2 ml-2" size={25} />
+            <span>{value.likes.length}</span>
           </button>
 
           <button
@@ -216,8 +216,8 @@ const PostCard = ({ type, value }) => {
               isCommented ? "text-blue-500" : "text-gray-500"
             }`}
           >
-            <FaComment className="mr-2" size={20} />
-            <span>{value.comments.length} Comment</span>
+            <FaComment className="mr-2" size={25} />
+            <span>{value.comments.length}</span>
           </button>
 
           <button
@@ -226,8 +226,8 @@ const PostCard = ({ type, value }) => {
               isShared ? "text-green-500" : "text-gray-500"
             }`}
           >
-            <FaShare className="mr-2" size={20} />
-            <span>Share</span>
+            <FaShare className="mr-2" size={25} />
+            <span></span>
           </button>
         </div>
       </div>

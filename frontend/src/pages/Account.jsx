@@ -9,6 +9,7 @@ import { FiSettings } from "react-icons/fi";
 import { LuUpload } from "react-icons/lu";
 import axios from "axios";
 import toast from "react-hot-toast";
+import VideoCard from "../components/VideoCard";
 
 const Account = ({ user }) => {
   const navigate = useNavigate();
@@ -129,10 +130,10 @@ const Account = ({ user }) => {
             {/* Settings Modal */}
             {showSettingsModal && (
               <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-                <div className="bg-gradient-to-r from-blue-100 to-purple-200  max-w-lg p-8 rounded-lg shadow-xl relative">
+                <div className="bg-gradient-to-r from-blue-100 to-purple-200  max-w-sm p-8 rounded-lg shadow-xl relative">
                   {/* Close Button */}
                   <button
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-semibold"
+                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-semibold"
                     onClick={() => setShowSettingsModal(false)}
                   >
                     &times;
@@ -258,13 +259,7 @@ const Account = ({ user }) => {
                     </button>
                   </form>
 
-                  {/* Save Button */}
-                  <button
-                    onClick={() => setShowSettingsModal(false)}
-                    className="w-full px-4 py-2 mb-4 mt-5 bg-indigo-500 text-white font-semibold rounded hover:bg-indigo-600 transition"
-                  >
-                    Save
-                  </button>
+                
 
                   {/* Logout Button */}
                   <button
@@ -364,7 +359,7 @@ const Account = ({ user }) => {
                   )
                 ) : myReels.length > 0 ? (
                   myReels.map((reel) => (
-                    <PostCard value={reel} key={reel._id} type="reel" />
+                    <VideoCard value={reel} key={reel._id} type="reel" />
                   ))
                 ) : (
                   <p className="text-gray-500 text-center">No reels yet</p>

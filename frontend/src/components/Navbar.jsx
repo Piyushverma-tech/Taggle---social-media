@@ -24,7 +24,7 @@ const Navbar = ({ user }) => {
         "
     >
       {/* Navigation container */}
-      <div className="md:flex md:flex-col md:justify-center md:space-y-6 w-full h-full py-3 flex flex-row justify-around items-center">
+      <div className="md:flex md:flex-col md:justify-center md:space-y-6 w-full h-full py-2 flex flex-row justify-around items-center">
         {navItems.map((item) => (
           <Link
             key={item.id}
