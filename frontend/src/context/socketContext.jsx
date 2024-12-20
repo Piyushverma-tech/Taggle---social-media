@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import { UserData } from "./userContext";
 
 
-const EndPoint = "http://localhost:7000"; 
+const EndPoint = "https://taggle-social-media.onrender.com"; 
 
 const SocketContext = createContext();
 
