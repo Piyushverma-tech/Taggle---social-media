@@ -18,7 +18,7 @@ const Navbar = ({ user }) => {
         md:left-5 md:top-0 md:h-screen md:w-20
         md:bg-transparent md:shadow-none
         w-full md:bottom-auto bottom-0
-        bg-gray-200
+        bg-gray-100
         text-gray-500 shadow-lg z-50
         md:flex flex-col justify-center items-center space-y-6
         "
