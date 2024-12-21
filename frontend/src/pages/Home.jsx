@@ -19,7 +19,7 @@ function Home() {
         <Loading />
       ) : (
         <div className="bg-gradient-to-r from-blue-100 to-purple-200 min-h-screen relative">
-          <h1 className="text-center font-extrabold text-5xl p-4 text-indigo-500">Taggle</h1>
+          <h1 className="text-center font-extrabold text-5xl p-2 text-indigo-500">Taggle</h1>
           {/* Add Post Modal */}
           {showModal && (
             <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
