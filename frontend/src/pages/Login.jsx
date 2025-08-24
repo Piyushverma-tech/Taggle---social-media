@@ -30,6 +30,20 @@ function Login() {
     setShowPassword((prevState) => !prevState);
   };
 
+  const DemoCredentialsBox = () => (
+    <div className="absolute top-6 z-10 p-4 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg shadow-md">
+      <div className="text-base text-gray-600 mb-2">Demo credentials:</div>
+      <div className="text-sm text-gray-800 space-y-1">
+        <div>
+          <span className="font-medium">Email:</span> demo@taggle.com
+        </div>
+        <div>
+          <span className="font-medium">Password:</span> demo1234
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       {loading ? (
@@ -38,6 +52,7 @@ function Login() {
         <div className="min-h-screen flex flex-col lg:flex-row bg-gray-50">
           {/* Sidebar */}
           <div className="flex flex-col items-center justify-center bg-indigo-600 text-white p-8 lg:w-1/3">
+            <DemoCredentialsBox />
             <h2 className="text-3xl font-bold mb-4">Welcome Back!</h2>
             <p className="text-center mb-6">
               Dont have an account? Sign up and Start Socializing!
